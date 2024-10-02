@@ -9,8 +9,6 @@ public class SistemaGUI {
 
     public SistemaGUI() {
 
-        Prateleira prateleira = new Prateleira();
-
         // Cria o JFrame principal
         JFrame frame = new JFrame("Sistema básico");
         frame.setSize(1920, 1080);
@@ -98,11 +96,12 @@ public class SistemaGUI {
         frame.setVisible(true);
 
 
-
         ImageIcon icone = new ImageIcon("src/main/java/org/Img/Logo.png"); // Substitua pelo caminho correto
         frame.setIconImage(icone.getImage());
 
 
+        Prateleira prateleira = new Prateleira();
+        Produto p = new Produto();
 
         // Ações botões
         botaoCadastrar.addActionListener(new ActionListener() {
@@ -113,9 +112,11 @@ public class SistemaGUI {
                 double preco = Double.parseDouble(precoField.getText());
                 String descricao = descricaoField.getText();
 
-                Produto produto = new Produto(preco, descricao);
+                p.setDescricao(descricao);
+                p.setPreco(preco);
+
                 try {
-                    prateleira.cadastraProduto(produto);
+                    prateleira.cadastraProduto(p);
                 } catch (produtoJaExisteException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
@@ -123,6 +124,7 @@ public class SistemaGUI {
                 JOptionPane.showMessageDialog(frame, "Cadastrado: \nPreço: " + preco + "\nDescrição: " + descricao);
             }
         });
+
 
         botaoBuscar.addActionListener(new ActionListener() {
             @Override
@@ -132,8 +134,13 @@ public class SistemaGUI {
                 // Ação buscar pelo valor de descrição
                 String descricaoBusca = buscaDescricaoField.getText();
 
-                JOptionPane.showMessageDialog(frame, "Buscando por: \nDescrição: " + descricaoBusca + "\n" +
-                        "O produto: " + prateleira.existeProduto());
+                try {
+                    JOptionPane.showMessageDialog(frame, "Buscando por: \nDescrição: " + descricaoBusca + "\n" +
+                            "O produto: " + prateleira.getProdutoEspcifico(descricaoBusca));
+                } catch (produtoNaoExisteException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
+                }
+
             }
         });
 

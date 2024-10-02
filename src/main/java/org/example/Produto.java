@@ -3,6 +3,10 @@ package org.example;
 public class Produto {
  private double preco;
  private String descricao;
+public Produto() {
+    this.preco = 0;
+    this.descricao = "";
+}
 
  public Produto(double preco, String descricao) {
      this.preco = preco;
