@@ -12,20 +12,17 @@ public class SistemaGUI {
         Prateleira prateleira = new Prateleira();
 
         // Cria o JFrame principal
-        JFrame frame = new JFrame("Sistema de Cadastro, Busca e Exclusão");
-        frame.setSize(500, 500);
+        JFrame frame = new JFrame("Sistema básico");
+        frame.setSize(1920, 1080);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null); // Layout manual
 
-
-
-        // ------------------- Bloco de Cadastro ------------------- //
+        // Bloco de Cadastro
         JPanel cadastroPanel = new JPanel();
-        cadastroPanel.setBounds(10, 10, 360, 120);  // Posição e tamanho do painel
+        cadastroPanel.setPreferredSize(new Dimension(360, 140));
         cadastroPanel.setBorder(BorderFactory.createTitledBorder("Cadastro"));
         cadastroPanel.setLayout(null);  // Layout manual para o painel
 
-        // Input de Preço (Cadastro)
+        // preço
         JLabel precoLabel = new JLabel("Preço:");
         precoLabel.setBounds(10, 20, 100, 25);
         cadastroPanel.add(precoLabel);
@@ -34,7 +31,7 @@ public class SistemaGUI {
         precoField.setBounds(120, 20, 200, 25);
         cadastroPanel.add(precoField);
 
-        // Input de Descrição (Cadastro)
+        // descrição
         JLabel descricaoLabel = new JLabel("Descrição:");
         descricaoLabel.setBounds(10, 50, 100, 25);
         cadastroPanel.add(descricaoLabel);
@@ -43,20 +40,17 @@ public class SistemaGUI {
         descricaoField.setBounds(120, 50, 200, 25);
         cadastroPanel.add(descricaoField);
 
-        // Botão de Cadastrar
-        JButton cadastrarButton = new JButton("Cadastrar");
-        cadastrarButton.setBounds(120, 110, 100, 25);
-        cadastroPanel.add(cadastrarButton);
+        // Botão Cadastrar
+        JButton botaoCadastrar = new JButton("Cadastrar");
+        botaoCadastrar.setBounds(120, 90, 100, 25);
+        cadastroPanel.add(botaoCadastrar);
 
-        frame.add(cadastroPanel); // Adiciona o painel de cadastro ao JFrame
-
-        // ------------------- Bloco de Busca ------------------- //
+        // Bloco de Busca
         JPanel buscaPanel = new JPanel();
-        buscaPanel.setBounds(10, 140, 360, 80);  // Posição e tamanho do painel
+        buscaPanel.setPreferredSize(new Dimension(360, 100));
         buscaPanel.setBorder(BorderFactory.createTitledBorder("Busca"));
-        buscaPanel.setLayout(null);  // Layout manual para o painel
+        buscaPanel.setLayout(null);
 
-        // Input de Descrição (Busca)
         JLabel buscaDescricaoLabel = new JLabel("Descrição:");
         buscaDescricaoLabel.setBounds(10, 20, 100, 25);
         buscaPanel.add(buscaDescricaoLabel);
@@ -65,85 +59,96 @@ public class SistemaGUI {
         buscaDescricaoField.setBounds(120, 20, 200, 25);
         buscaPanel.add(buscaDescricaoField);
 
-        // Botão de Buscar
-        JButton buscarButton = new JButton("Buscar");
-        buscarButton.setBounds(120, 50, 100, 25);
-        buscaPanel.add(buscarButton);
+        JButton botaoBuscar = new JButton("Buscar");
+        botaoBuscar.setBounds(120, 60, 100, 25);
+        buscaPanel.add(botaoBuscar);
 
-        frame.add(buscaPanel); // Adiciona o painel de busca ao JFrame
-
-        // ------------------- Bloco de Exclusão ------------------- //
+        // Bloco de Exclusão
         JPanel exclusaoPanel = new JPanel();
-        exclusaoPanel.setBounds(10, 230, 360, 120);  // Posição e tamanho do painel
+        exclusaoPanel.setPreferredSize(new Dimension(360, 140));
         exclusaoPanel.setBorder(BorderFactory.createTitledBorder("Exclusão"));
-        exclusaoPanel.setLayout(null);  // Layout manual para o painel
+        exclusaoPanel.setLayout(null);
 
-        // Input de Descrição (Exclusão)
         JLabel exclusaoDescricaoLabel = new JLabel("Descrição:");
-        exclusaoDescricaoLabel.setBounds(10, 50, 100, 25);
+        exclusaoDescricaoLabel.setBounds(10, 20, 100, 25);
         exclusaoPanel.add(exclusaoDescricaoLabel);
 
         JTextField exclusaoDescricaoField = new JTextField();
-        exclusaoDescricaoField.setBounds(120, 50, 200, 25);
+        exclusaoDescricaoField.setBounds(120, 20, 200, 25);
         exclusaoPanel.add(exclusaoDescricaoField);
 
+        JButton BotaoExcluir = new JButton("Excluir");
+        BotaoExcluir.setBounds(120, 60, 100, 25);
+        exclusaoPanel.add(BotaoExcluir);
 
-        // Botão de Excluir
-        JButton excluirButton = new JButton("Excluir");
-        excluirButton.setBounds(120, 110, 100, 25);
-        exclusaoPanel.add(excluirButton);
+        // Painel centralizado que engloba os outros três painéis
+        JPanel painelCentral = new JPanel();
+        painelCentral.setBorder(BorderFactory.createTitledBorder("Painel Central"));
+        painelCentral.setLayout(new BoxLayout(painelCentral, BoxLayout.Y_AXIS)); // Layout em coluna
+        painelCentral.add(cadastroPanel);
+        painelCentral.add(buscaPanel);
+        painelCentral.add(exclusaoPanel);
 
-        frame.add(exclusaoPanel); // Adiciona o painel de exclusão ao JFrame
+        // Centralizar o painelCentral no JFrame
+        JPanel container = new JPanel();
+        container.setLayout(new GridBagLayout());
+        container.add(painelCentral); // Adiciona o painelCentral ao centro do container
 
-        // Torna o JFrame visível
+        frame.add(container); // Adiciona o container ao frame
         frame.setVisible(true);
 
-        // Ações dos botões
-        cadastrarButton.addActionListener(new ActionListener() {
+
+
+        ImageIcon icone = new ImageIcon("src/main/java/org/Img/Logo.png"); // Substitua pelo caminho correto
+        frame.setIconImage(icone.getImage());
+
+
+
+        // Ações botões
+        botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ação para cadastrar os valores
+
+                // Ação cadastrar os valores
                 double preco = Double.parseDouble(precoField.getText());
                 String descricao = descricaoField.getText();
-
 
                 Produto produto = new Produto(preco, descricao);
                 try {
                     prateleira.cadastraProduto(produto);
                 } catch (produtoJaExisteException ex) {
-                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
 
                 JOptionPane.showMessageDialog(frame, "Cadastrado: \nPreço: " + preco + "\nDescrição: " + descricao);
             }
         });
 
-        buscarButton.addActionListener(new ActionListener() {
+        botaoBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ação para buscar pelo valor de descrição
+
+
+                // Ação buscar pelo valor de descrição
                 String descricaoBusca = buscaDescricaoField.getText();
 
-
-                JOptionPane.showMessageDialog(frame, "Buscando por: \nDescrição: " + descricaoBusca +"\n"+ "Existe o produto: "+prateleira.existeProduto(descricaoBusca));
-
+                JOptionPane.showMessageDialog(frame, "Buscando por: \nDescrição: " + descricaoBusca + "\n" +
+                        "O produto: " + prateleira.existeProduto());
             }
         });
 
-        excluirButton.addActionListener(new ActionListener() {
+        BotaoExcluir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String descricao = exclusaoDescricaoField.getText();
-
 
                 try {
                     prateleira.removeProduto(descricao);
                 } catch (produtoNaoExisteException ex) {
-                    JOptionPane.showMessageDialog(null,ex.getMessage());
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
 
-                JOptionPane.showMessageDialog(frame, "Excluído: "+ "\nDescrição: " + descricao);
+                JOptionPane.showMessageDialog(frame, "Excluído: \nDescrição: " + descricao);
             }
         });
     }
