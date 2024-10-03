@@ -1,5 +1,9 @@
 package org.example;
 
+import org.Exceptions.produtoJaExisteException;
+import org.Exceptions.produtoNaoEncontradoException;
+import org.Exceptions.produtoNaoExisteException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
