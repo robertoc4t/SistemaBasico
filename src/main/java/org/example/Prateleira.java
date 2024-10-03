@@ -17,15 +17,13 @@ public class Prateleira {
         this.produtosPrateleiras.put(produto.getDescricao(), produto);
     }
 
-    public boolean removeProduto(String descricao) throws produtoNaoExisteException {
-        if (this.produtosPrateleiras.containsKey(descricao)) {
-            if (this.produtosPrateleiras.get(descricao).equals(null)) {
+    public void removeProduto(String descricao) throws produtoNaoEncontradoException {
+    if(existeProduto(descricao)) {
+        this.produtosPrateleiras.remove(descricao);
+    }else{
+        throw new produtoNaoEncontradoException("Não foi encontrado o produto com o descricao: " + descricao);
+    }
 
-                this.produtosPrateleiras.remove(descricao);
-                return true;
-            }
-        }
-        throw new produtoNaoExisteException("Produto não existe!");
     }
 
     public boolean existeProduto(String descricao) {

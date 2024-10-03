@@ -140,7 +140,6 @@ public class SistemaGUI {
                 } catch (produtoNaoExisteException ex) {
                     JOptionPane.showMessageDialog(null, ex);
                 }
-
             }
         });
 
@@ -151,11 +150,12 @@ public class SistemaGUI {
 
                 try {
                     prateleira.removeProduto(descricao);
-                } catch (produtoNaoExisteException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Produto: "+descricao+" Excluído");
+                } catch (produtoNaoEncontradoException ex) {
+                    JOptionPane.showMessageDialog( frame, new RuntimeException(ex));
                 }
 
-                JOptionPane.showMessageDialog(frame, "Excluído: \nDescrição: " + descricao);
+
             }
         });
     }
